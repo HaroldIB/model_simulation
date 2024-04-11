@@ -14,49 +14,54 @@
   </head>
 
   <body class="bg-center bg-cover">
-    <nav
-      class="flex items-center justify-between py-1 bg-indigo-900 text-white px-2 sm:px-12"
-    >
-      <div class="w-auto px-1 sm:px-6 sm:w-auto max-w-xs flex items-center">
-        <a class="nav-link" href="/">
-          <img src="/img/icon.png" alt="Icon" width="30" height="30" />
-        </a>
-        <a href="/" class="nav-link">
-          <h1 class="text-2xl font-bold">MotionSim</h1>
-        </a>
+    <div class="block">
+      <div>
+        <nav
+          class="flex items-center justify-between py-1 bg-indigo-900 text-white px-2 sm:px-12"
+        >
+          <div class="w-auto px-1 sm:px-6 sm:w-auto max-w-xs flex items-center">
+            <a class="nav-link" href="/">
+              <img src="/img/icon.png" alt="Icon" width="30" height="30" />
+            </a>
+            <a href="/" class="nav-link">
+              <h1 class="text-2xl font-bold">MotionSim</h1>
+            </a>
+          </div>
+
+          <ul
+            class="flex items-center flex-col sm:flex-row justify-start pt-1 space-y-1 sm:space-y-0"
+          >
+            {{#if name}}
+              <li class="nav-item px-2">
+                <p class="font-semibold">{{name}}</p>
+              </li>
+              <li class="nav-item px-2">
+                <a
+                  href="/logout"
+                  class="nav-link font-semibold bg-red-500 hover:bg-red-700 py-3 px-4 rounded-md"
+                >Cerrar Sesión</a>
+              </li>
+            {{else}}
+              <li class="nav-item px-2 flex items-center justify-center">
+                <a
+                  href="/login"
+                  class="nav-link font-semibold text-sm sm:text-base hover:bg-green-700 py-3 px-4 rounded-md"
+                >Iniciar Sesión</a>
+              </li>
+              <li class="nav-item px-2 ml-0">
+                <a
+                  href="/register"
+                  class="nav-link font-semibold border-2 border-white hover:bg-white hover:text-green-700 py-3 px-4 rounded-md"
+                >Registrarse</a>
+              </li>
+            {{/if}}
+          </ul>
+        </nav>
+      </div>
+      <div class="mt-16">
+        {{{body}}}
       </div>
 
-      <ul
-        class="flex items-center flex-col sm:flex-row justify-start pt-1 space-y-1 sm:space-y-0"
-      >
-        {{#if name}}
-          <li class="nav-item px-2">
-            <p class="font-semibold">{{name}}</p>
-          </li>
-          <li class="nav-item px-2">
-            <a
-              href="/logout"
-              class="nav-link font-semibold bg-red-500 hover:bg-red-700 py-3 px-4 rounded-md"
-            >Cerrar Sesión</a>
-          </li>
-        {{else}}
-          <li class="nav-item px-2 flex items-center justify-center">
-            <a
-              href="/login"
-              class="nav-link font-semibold text-sm sm:text-base hover:bg-green-700 py-3 px-4 rounded-md"
-            >Iniciar Sesión</a>
-          </li>
-          <li class="nav-item px-2 ml-0">
-            <a
-              href="/register"
-              class="nav-link font-semibold border-2 border-white hover:bg-white hover:text-green-700 py-3 px-4 rounded-md"
-            >Registrarse</a>
-          </li>
-        {{/if}}
-      </ul>
-    </nav>
-
-    {{{body}}}
-
+    </div>
   </body>
 </html>
