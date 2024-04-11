@@ -6,6 +6,7 @@ const mysql = require("mysql"); // MySQL es un módulo para trabajar con bases d
 const session = require("express-session"); // express-session es un middleware de Express para manejar sesiones
 const bodyParser = require("body-parser"); // body-parser es un middleware para analizar el cuerpo de las solicitudes HTTP
 const loginRoutes = require("./routes/login"); // Importamos el archivo de rutas de login
+const path = require("path");
 // Creamos una nueva aplicación Express
 const app = express();
 
@@ -13,6 +14,7 @@ const app = express();
 app.set("port", process.env.PORT || 4000);
 
 // Configuramos la ubicación de las vistas de la aplicación
+
 app.set("views", __dirname + "/views");
 
 // Configuramos el motor de plantillas de la aplicación para usar Handlebars
@@ -53,3 +55,13 @@ app.get("/", (req, res) => {
     res.redirect("/login");
   }
 });
+
+app.get("/simulation", (req, res) => {
+  if (req.session.loggedin) {
+    res.render("simulation", { name: req.session.name });
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.use(express.static(path.join(__dirname, "public")));

@@ -1,54 +1,51 @@
-<html lang="eS">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>MODELO DE SIMULACIÓN</title>
-
+    <title>MOTION SIMULATOR</title>
     <!-- Tailwind CSS Link -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css"
     />
-
-    <!-- Fontawesome Link -->
-    <link
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      rel="stylesheet"
-    />
-
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
-  <body class="bg-gray-200">
 
-    <nav class="flex py-5 bg-green-500 text-white px-24">
-      <div class="w-1/2 px-12 mr-auto">
-        <h1 class="text-2xl font-bold">My Application</h1>
+  <body class="bg-center bg-cover">
+    <nav
+      class="flex items-center justify-between py-1 bg-indigo-900 text-white px-2 sm:px-12"
+    >
+      <div class="w-auto px-1 sm:px-6 sm:w-auto max-w-xs flex items-center">
+        <a href="/" class="nav-link">
+          <h1 class="text-2xl font-bold">MotionSim</h1>
+        </a>
       </div>
 
-      <ul class="w-1/2 px-16 ml-auto flex justify-end pt-1">
+      <ul
+        class="flex items-center flex-col sm:flex-row justify-start pt-1 space-y-1 sm:space-y-0"
+      >
         {{#if name}}
-          <li class="nav-item px-4">
+          <li class="nav-item px-2">
             <p class="font-semibold">{{name}}</p>
           </li>
-          <li class="nav-item px-4">
+          <li class="nav-item px-2">
             <a
               href="/logout"
               class="nav-link font-semibold bg-red-500 hover:bg-red-700 py-3 px-4 rounded-md"
-            >Logout</a>
+            >Cerrar Sesión</a>
           </li>
         {{else}}
-          <li class="nav-item px-4">
+          <li class="nav-item px-2 flex items-center justify-center">
             <a
               href="/login"
-              class="nav-link font-semibold hover:bg-green-700 py-3 px-4 rounded-md"
-            >Login</a>
+              class="nav-link font-semibold text-sm sm:text-base hover:bg-green-700 py-3 px-4 rounded-md"
+            >Iniciar Sesión</a>
           </li>
-
-          <li class="nav-item px-4">
+          <li class="nav-item px-2 ml-0">
             <a
               href="/register"
               class="nav-link font-semibold border-2 border-white hover:bg-white hover:text-green-700 py-3 px-4 rounded-md"
-            >Register</a>
+            >Registrarse</a>
           </li>
         {{/if}}
       </ul>

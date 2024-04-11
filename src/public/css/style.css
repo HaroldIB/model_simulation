@@ -1,0 +1,235 @@
+body {
+  background-image: url("/img/image.jpg");
+  background-size: cover;
+  background-position: center;
+}
+/* Estilos para el contenedor principal */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.nav-item {
+  margin: 0.5rem 0;
+}
+/* Estilos para el encabezado */
+h1 {
+  text-align: center;
+}
+
+/* Estilos para el contenido */
+.content {
+  margin-bottom: 20px;
+}
+
+/* Estilos para el párrafo */
+p {
+  font-size: 1rem;
+}
+
+/* Estilos para los controles */
+.controls {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Estilos para el botón */
+button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para el botón de Iniciar Simulación */
+button.startButton {
+  background-color: #007bff;
+}
+
+/* Estilos para el botón de Terminar Simulación */
+button.endButton {
+  background-color: #dc3545;
+}
+
+/* Estilos para el botón de Iniciar Simulación cuando está deshabilitado */
+button.startButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Estilos para la entrada de texto */
+input[type="number"] {
+  padding: 0.25rem;
+  width: 80px;
+}
+
+/* Estilos para la etiqueta */
+label {
+  font-weight: bold;
+}
+
+/* Estilos para el canvas */
+#canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+#graphCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+#velocityGraphCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+#graphCanvas,
+#velocityGraphCanvas {
+  width: 100%; /* Esto hace que cada canvas ocupe todo el ancho del contenedor */
+  margin: 0; /* Esto elimina el margen alrededor de los canvas */
+}
+.graph-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.graph-container h2 {
+  color: #333;
+  font-size: 1.5rem;
+}
+/* Estilos para los parámetros */
+.params {
+  text-align: center;
+}
+
+#modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden; /* Cambia esto */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%; /* Cambia esto al tamaño que prefieras */
+  max-width: 500px; /* Cambia esto al tamaño máximo que prefieras */
+}
+
+/* Estilos por defecto (para móviles) */
+.graph-container {
+  width: 100%;
+}
+.graph-container h2 {
+  color: #333;
+  font-size: 1rem; /* Cambia esto al tamaño que prefieras */
+}
+
+.simulation-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Esto centrará verticalmente los elementos dentro de .simulation-container */
+}
+/* Estilos para tabletas y celular horizontal */
+@media (min-width: 400px) {
+  .graph-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; /* Esto centrará los canvas dentro del contenedor */
+    align-items: center; /* Esto alineará verticalmente los canvas en el centro */
+  }
+  #graphCanvas,
+  #velocityGraphCanvas {
+    width: 100%; /* Esto hace que cada canvas ocupe todo el ancho del contenedor */
+    margin: 0; /* Esto elimina el margen alrededor de los canvas */
+  }
+}
+/* Estilos para pantallas grandes */
+@media (min-width: 1200px) {
+  .main-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .simulation-container {
+    flex: 3; /* Esto hace que el contenedor de la simulación principal ocupe más espacio */
+  }
+  .graph-container {
+    flex: 1; /* Esto hace que el contenedor de las gráficas ocupe menos espacio */
+    flex-direction: column;
+  }
+  #graphCanvas,
+  #velocityGraphCanvas {
+    width: 100%; /* Esto hace que los canvas de las gráficas ocupen todo el ancho de su contenedor */
+  }
+}
+#alertModal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%; /* Cambia esto al tamaño que prefieras */
+  max-width: 500px; /* Cambia esto al tamaño máximo que prefieras */
+  text-align: center; /* Centra el texto dentro del contenido del modal */
+}
+
+#confirmButton {
+  background-color: #dc3545; /* Color de alerta */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#cancelButton {
+  background-color: #28a745; /* Color de éxito */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+}
