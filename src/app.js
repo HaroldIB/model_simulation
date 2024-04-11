@@ -36,7 +36,7 @@ app.use(
     host: process.env.DB_HOST || "localhost", // La dirección del servidor de la base de datos
     user: process.env.DB_USER || "root", // El nombre de usuario de la base de datos
     password: process.env.DB_PASSWORD || "", // La contraseña de la base de datos
-    port: process.env.DB_PORT || 3306, // El puerto de la base de datos
+    port: process.env.DB_PORT, // El puerto de la base de datos
     database: process.env.DB_NAME || "user_login", // El nombre de la base de datos
   })
 );
