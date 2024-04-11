@@ -2,7 +2,7 @@
 const express = require("express"); // Express es un framework para construir aplicaciones web en Node.js
 const { engine } = require("express-handlebars"); // Handlebars es un motor de plantillas para Express
 const myconnection = require("express-myconnection"); // express-myconnection es un middleware de Express para MySQL
-const mysql = require("mysql"); // MySQL es un módulo para trabajar con bases de datos MySQL
+const mysql = require("mysql2");
 const session = require("express-session"); // express-session es un middleware de Express para manejar sesiones
 const bodyParser = require("body-parser"); // body-parser es un middleware para analizar el cuerpo de las solicitudes HTTP
 const loginRoutes = require("./routes/login"); // Importamos el archivo de rutas de login
@@ -36,7 +36,7 @@ app.use(
     host: process.env.DB_HOST || "localhost", // La dirección del servidor de la base de datos
     user: process.env.DB_USER || "root", // El nombre de usuario de la base de datos
     password: process.env.DB_PASSWORD || "", // La contraseña de la base de datos
-    port: process.env.DB_PORT, // El puerto de la base de datos
+    port: process.env.DB_PORT || 3306, // El puerto de la base de datos
     database: process.env.DB_NAME || "user_login", // El nombre de la base de datos
   })
 );
