@@ -64,4 +64,12 @@ app.get("/simulation", (req, res) => {
   }
 });
 
+app.get("/simulation2", (req, res) => {
+  if (req.session.loggedin) {
+    res.render("simulation2", { name: req.session.name });
+  } else {
+    res.redirect("/login");
+  }
+});
+
 app.use(express.static(path.join(__dirname, "public")));
