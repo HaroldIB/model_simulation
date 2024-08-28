@@ -14,7 +14,7 @@
       los conceptos clave de la cinemática de una manera emocionante y efectiva.
     </p>
     <a
-      href="/index"
+      href="/login"
       class="mt-4 bg-white text-blue-500 px-6 py-3 rounded-lg font-semibold text-lg"
     >Inicia Sesión</a>
   </div>
@@ -27,24 +27,51 @@
       <input
         type="text"
         name="name"
-        placeholder="Name"
+        placeholder="Nombres y Apellidos"
         class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 bg-gray-200 focus:bg-white"
         required
       />
       <input
         type="email"
         name="email"
-        placeholder="Email"
+        placeholder="Correo Electrónico"
         class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 bg-gray-200 focus:bg-white"
         required
       />
       <input
         type="password"
         name="password"
-        placeholder="Password"
+        placeholder="Contraseña"
         class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 bg-gray-200 focus:bg-white"
         required
       />
+      <select
+        name="grade"
+        class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 bg-gray-200 focus:bg-white"
+        required
+      >
+        <option value="" disabled selected>Escoge el grado que cursas</option>
+        <option value="Tercero de Secundaria">Tercero de Secundaria</option>
+        <option value="Cuarto de Secundaria">Cuarto de Secundaria</option>
+        <option value="Quinto de Secundaria">Quinto de Secundaria</option>
+        <option value="Sexto de Secundaria">Sexto de Secundaria</option>
+        <option value="Prefacultativos">Prefacultativos</option>
+      </select>
+
+      <select
+        name="institution"
+        class="border border-gray-200 w-full text-lg placeholder-gray-500 p-2 my-2 bg-gray-200 focus:bg-white"
+        required
+      >
+        <option value="" disabled selected>Universidad o Colegio</option>
+        <option value="Tercero de Secundaria">Boliviano Aleman</option>
+        <option value="Cuarto de Secundaria">Walter Alpire Durán B</option>
+        <option value="Quinto de Secundaria">San José II</option>
+        <option value="Sexto de Secundaria">La Salle</option>
+        <option value="Sexto de Secundaria">UMSA</option>
+        <option value="Prefacultativos">UPEA</option>
+        <option value="Prefacultativos">Otro..</option>
+      </select>
       <button
         type="submit"
         class="rounded-md bg-green-500 w-full text-lg text-white font-semibold p-2 my-3 hover:bg-green-600 focus:bg-green-700"

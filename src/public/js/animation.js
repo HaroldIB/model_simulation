@@ -36,7 +36,7 @@ const fixedDeltaTime = 1 / 60;
 // Definiciones de funciones
 
 function initMoto() {
-  moto = new ImageMoto("img/moto.png", motoWidth, motoHeight);
+  moto = new ImageMoto("/img/moto.png", motoWidth, motoHeight);
   moto.x = initialMotoPositionX - moto.width;
   moto.y = initialMotoPositionY;
   moto.img.onload = function () {
@@ -93,7 +93,7 @@ function loadAndDrawImage() {
     initMoto();
     initRuler();
   };
-  background.image.src = "img/background.jpg";
+  background.image.src = "/img/background.jpg";
   initGraphs();
 }
 function disableButtonsAndInputs() {

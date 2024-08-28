@@ -7,6 +7,8 @@ const session = require("express-session"); // express-session es un middleware 
 const bodyParser = require("body-parser"); // body-parser es un middleware para analizar el cuerpo de las solicitudes HTTP
 const loginRoutes = require("./routes/login"); // Importamos el archivo de rutas de login
 const path = require("path");
+
+// const { storeAdmin } = require('../controllers/LoginController');
 // Creamos una nueva aplicación Express
 const app = express();
 
@@ -37,9 +39,10 @@ app.use(
     user: process.env.DB_USER || "root", // El nombre de usuario de la base de datos
     password: process.env.DB_PASSWORD || "", // La contraseña de la base de datos
     port: process.env.DB_PORT || 3306, // El puerto de la base de datos
-    database: process.env.DB_NAME || "user_login", // El nombre de la base de datos
+    database: process.env.DB_NAME || "motionsim", // El nombre de la base de datos
   })
 );
+
 app.use(session({ secret: "secret", resave: true, saveUninitialized: true })); // Configuramos la sesión
 
 // Iniciamos el servidor en el puerto configurado
@@ -48,17 +51,18 @@ app.listen(app.get("port"), () => {
 });
 
 app.use("/", loginRoutes); // Usamos las rutas de login en la aplicación
+
 app.get("/", (req, res) => {
   if (req.session.loggedin == true) {
-    res.render("home", { name: req.session.name });
+    res.render("home_student", { name: req.session.name });
   } else {
     res.redirect("/login");
   }
 });
 
-app.get("/simulation", (req, res) => {
+app.get("/simulations/simulation", (req, res) => {
   if (req.session.loggedin) {
-    res.render("simulation", { name: req.session.name });
+    res.render("simulations/simulation", { name: req.session.name });
   } else {
     res.redirect("/login");
   }
@@ -69,6 +73,30 @@ app.get("/simulation2", (req, res) => {
     res.render("simulation2", { name: req.session.name });
   } else {
     res.redirect("/login");
+  }
+});
+
+app.get("/home_student", (req, res) => {
+  if (req.session.loggedin) {
+    res.render("home_student", { name: req.session.name });
+  } else {
+    res.redirect("/");
+  }
+});
+
+app.get("/simulations_mru", (req, res) => {
+  if (req.session.loggedin) {
+    res.render("simulations_mru", { name: req.session.name });
+  } else {
+    res.redirect("/");
+  }
+});
+
+app.get("/home_admin", (req, res) => {
+  if (req.session.loggedin) {
+    res.render("home_admin", { name: req.session.name });
+  } else {
+    res.redirect("/");
   }
 });
 
