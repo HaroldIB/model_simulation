@@ -6,10 +6,10 @@ const mysql = require("mysql2");
 const session = require("express-session"); // express-session es un middleware de Express para manejar sesiones
 const bodyParser = require("body-parser"); // body-parser es un middleware para analizar el cuerpo de las solicitudes HTTP
 const loginRoutes = require("./routes/login"); // Importamos el archivo de rutas de login
+const adminRoutes = require("./routes/home_admin");
+const userRoutes = require("./routes/home_student");
+const simulationRoutes = require("./routes/simulation");
 const path = require("path");
-
-// const { storeAdmin } = require('../controllers/LoginController');
-// Creamos una nueva aplicación Express
 const app = express();
 
 // Configuramos el puerto en el que se ejecutará la aplicación
@@ -51,53 +51,8 @@ app.listen(app.get("port"), () => {
 });
 
 app.use("/", loginRoutes); // Usamos las rutas de login en la aplicación
-
-app.get("/", (req, res) => {
-  if (req.session.loggedin == true) {
-    res.render("home_student", { name: req.session.name });
-  } else {
-    res.redirect("/login");
-  }
-});
-
-app.get("/simulations/simulation", (req, res) => {
-  if (req.session.loggedin) {
-    res.render("simulations/simulation", { name: req.session.name });
-  } else {
-    res.redirect("/login");
-  }
-});
-
-app.get("/simulation2", (req, res) => {
-  if (req.session.loggedin) {
-    res.render("simulation2", { name: req.session.name });
-  } else {
-    res.redirect("/login");
-  }
-});
-
-app.get("/home_student", (req, res) => {
-  if (req.session.loggedin) {
-    res.render("home_student", { name: req.session.name });
-  } else {
-    res.redirect("/");
-  }
-});
-
-app.get("/simulations_mru", (req, res) => {
-  if (req.session.loggedin) {
-    res.render("simulations_mru", { name: req.session.name });
-  } else {
-    res.redirect("/");
-  }
-});
-
-app.get("/home_admin", (req, res) => {
-  if (req.session.loggedin) {
-    res.render("home_admin", { name: req.session.name });
-  } else {
-    res.redirect("/");
-  }
-});
+app.use("/", adminRoutes); // Usamos las rutas de Home_admin en la aplicacion
+app.use("/", userRoutes); // Usamos la rutas de Home_student
+app.use("/", simulationRoutes); // Usamos la rutas de simulationroutes
 
 app.use(express.static(path.join(__dirname, "public")));

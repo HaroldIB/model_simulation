@@ -8,63 +8,86 @@
     <!-- Tailwind CSS Link -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
     />
+    <!-- Font Awesome para el ícono de WhatsApp -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
     <link rel="stylesheet" href="/css/style.css" />
   </head>
 
-  <body class="bg-center bg-cover">
-    <div class="block">
-      <div>
-        <nav
-          class="flex items-center justify-between pt-0 pb-4 sm:py-4 bg-indigo-900 text-white px-2 sm:px-12 fixed top-0 w-full z-10"
+  <body class="flex flex-col min-h-screen bg-center bg-cover">
+    <!-- Contenedor principal que crece para ocupar el espacio -->
+    <div class="flex-grow">
+      <!-- Contenido de la página -->
+      <nav
+        class="flex items-center justify-between pt-0 pb-4 sm:py-4 bg-indigo-900 text-white px-2 sm:px-12 fixed top-0 w-full z-10"
+      >
+        <div class="w-auto px-1 sm:px-6 sm:w-auto max-w-xs flex items-center">
+          <a class="nav-link" href="/">
+            <img src="/img/icon.png" alt="Icon" width="30" height="30" />
+          </a>
+          <a href="/" class="nav-link">
+            <h1 class="text-2xl font-bold">MotionSim</h1>
+          </a>
+        </div>
+
+        <ul
+          class="flex items-center flex-col sm:flex-row justify-start pt-0 space-y-1 sm:space-y-0 py-0"
         >
-          <div class="w-auto px-1 sm:px-6 sm:w-auto max-w-xs flex items-center">
-            <a class="nav-link" href="/">
-              <img src="/img/icon.png" alt="Icon" width="30" height="30" />
-            </a>
-            <a href="/" class="nav-link">
-              <h1 class="text-2xl font-bold">MotionSim</h1>
-            </a>
-          </div>
+          {{#if name}}
+            <li class="nav-item px-2">
+              <a href="/">
+                <p class="font-semibold">{{name}}</p>
+              </a>
+            </li>
+            <li class="nav-item px-2">
+              <a
+                href="/logout"
+                class="nav-link font-semibold bg-red-500 hover:bg-red-700 py-3 px-4 rounded-md"
+              >Cerrar Sesión</a>
+            </li>
+          {{else}}
+            <li class="nav-item px-2 flex items-center justify-center">
+              <a
+                href="/login"
+                class="nav-link font-semibold text-sm sm:text-base hover:bg-green-700 py-3 px-4 rounded-md"
+              >Iniciar Sesión</a>
+            </li>
+            <li class="nav-item px-2 ml-0">
+              <a
+                href="/register"
+                class="nav-link font-semibold border-2 border-white hover:bg-white hover:text-green-700 py-3 px-4 rounded-md"
+              >Registrarse</a>
+            </li>
+          {{/if}}
+        </ul>
+      </nav>
 
-          <ul
-            class="flex items-center flex-col sm:flex-row justify-start pt-0 space-y-1 sm:space-y-0 py-0"
-          >
-
-            {{#if name}}
-              <li class="nav-item px-2">
-                <a href="/">
-                  <p class="font-semibold">{{name}}</p>
-                </a>
-              </li>
-              <li class="nav-item px-2">
-                <a
-                  href="/logout"
-                  class="nav-link font-semibold bg-red-500 hover:bg-red-700 py-3 px-4 rounded-md"
-                >Cerrar Sesión</a>
-              </li>
-            {{else}}
-              <li class="nav-item px-2 flex items-center justify-center">
-                <a
-                  href="/login"
-                  class="nav-link font-semibold text-sm sm:text-base hover:bg-green-700 py-3 px-4 rounded-md"
-                >Iniciar Sesión</a>
-              </li>
-              <li class="nav-item px-2 ml-0">
-                <a
-                  href="/register"
-                  class="nav-link font-semibold border-2 border-white hover:bg-white hover:text-green-700 py-3 px-4 rounded-md"
-                >Registrarse</a>
-              </li>
-            {{/if}}
-          </ul>
-        </nav>
-      </div>
       <div class="mt-16">
         {{{body}}}
       </div>
-
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white text-[10px] py-2">
+      <div class="mx-auto flex justify-between items-center px-4">
+        <p class="m-0">© 2024 Harold Bustamante. Derechos reservados.</p>
+        <a
+          href="https://wa.me/59178853166"
+          target="_blank"
+          class="flex items-center text-green-400 hover:text-green-300"
+        >
+          <i class="fab fa-whatsapp mr-1"></i>
+        </a>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"
+    ></script>
   </body>
 </html>

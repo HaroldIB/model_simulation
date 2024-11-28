@@ -2,9 +2,31 @@
   class="text-center my-8 sm:my-24 text-4xl sm:text-6xl font-bold text-purple-700"
 >Bienvenido Investigador
   <b class="text-yellow-500">{{name}}</b></h1>
-<div
-  class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4"
->
-  <h1>AQUÍ SE MOSTRARN TODOS LOS DATOS DE LOS ESTUDIANTES QUE INGRESEN AL
-    SISTEMA</h1>
+<div class="mx-auto max-w-7xl bg-white/95  shadow-xl rounded-lg overflow-hidden">
+    <div class="p-6">
+ <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table class="w-full border-separate border-spacing-0">
+    <thead>
+      <tr class="bg-purple-100">
+        <th class="sticky top-0 px-4 py-3 text-left text-sm font-semibold text-purple-900 border-b-2 border-purple-200">ID</th>
+        <th class="sticky top-0 px-4 py-3 text-left text-sm font-semibold text-purple-900 border-b-2 border-purple-200">Nombre</th>
+        <th class="sticky top-0 px-4 py-3 text-left text-sm font-semibold text-purple-900 border-b-2 border-purple-200">Grado</th>
+        <th class="sticky top-0 px-4 py-3 text-left text-sm font-semibold text-purple-900 border-b-2 border-purple-200">Ingresos al sistema</th>
+        <th class="sticky top-0 px-4 py-3 text-left text-sm font-semibold text-purple-900 border-b-2 border-purple-200">Tiempo en el sistema</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white">
+      {{#each datos}}
+        <tr class="{{#if @index}}bg-purple-50/50{{else}}bg-white{{/if}} hover:bg-purple-50 transition-colors border-b border-purple-100 last:border-b-0">
+          <td class="px-4 py-3 text-gray-800">{{this.id_usuario}}</td>
+          <td class="px-4 py-3 text-gray-800 font-medium">{{this.nombre_u}}</td>
+          <td class="px-4 py-3 text-gray-600">{{this.grado_e}}</td>
+          <td class="px-4 py-3 text-gray-600 text-center">{{this.ing_sist}}</td>
+          <td class="px-4 py-3 text-gray-600 text-center">{{this.tiempo_total}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+</div>
 </div>

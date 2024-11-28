@@ -229,6 +229,24 @@ startButton.addEventListener("click", function () {
     );
   } else {
     init();
+
+    fetch("/guardar-datos-simulacion", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        speed: speed,
+        simulationTime: simulationTime,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Datos guardados con éxito:", data);
+      })
+      .catch((error) => {
+        console.error("Error al guardar los datos:", error);
+      });
   }
 });
 endButton.addEventListener("click", endSimulation);
