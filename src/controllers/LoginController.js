@@ -247,7 +247,7 @@ function storeAdmin(req, res) {
       return res.status(500).send("Database connection error.");
     }
     conn.query(
-      "SELECT * FROM Usuario WHERE email_u = ?",
+      "SELECT * FROM usuario WHERE email_u = ?",
       [investigadorData.email],
       (err, userdata) => {
         if (err) {
@@ -272,7 +272,7 @@ function storeAdmin(req, res) {
                 return res.status(500).send("Database connection error.");
               }
               conn.query(
-                "INSERT INTO Usuario SET ?",
+                "INSERT INTO usuario SET ?",
                 [userData],
                 (err, result) => {
                   if (err) {
@@ -285,7 +285,7 @@ function storeAdmin(req, res) {
                     universidad_i: investigadorData.universidad, // Universidad del investigador
                   };
                   conn.query(
-                    "INSERT INTO Investigador SET ?",
+                    "INSERT INTO investigador SET ?",
                     [investigadorDetails],
                     (err, rows) => {
                       if (err) {
