@@ -36,7 +36,7 @@ const fixedDeltaTime = 1 / 60;
 // Definiciones de funciones
 
 function initMoto() {
-  moto = new ImageMoto("/img/moto.png", motoWidth, motoHeight);
+  moto = new ImageParticle("/img/moto.png", motoWidth, motoHeight);
   moto.x = initialMotoPositionX - moto.width;
   moto.y = initialMotoPositionY;
   moto.img.onload = function () {

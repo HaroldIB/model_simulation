@@ -2,7 +2,7 @@
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 const startButton = document.getElementById("startButton");
-const speedInput = document.getElementById("speedInput");
+const distanceInput = document.getElementById("distanceInput");
 const simulationTimeInput = document.getElementById("simulationTime");
 const simulationDistanceInput = document.getElementById("simulationDistance");
 const endButton = document.getElementById("endButton");
@@ -35,7 +35,7 @@ const fixedDeltaTime = 1 / 60;
 
 // Definiciones de funciones
 function initPlane() {
-  plane = new ImagePlane("/img/plane.png", planeWidth, planeHeight);
+  plane = new ImageParticle("/img/plane.png", planeWidth, planeHeight);
   plane.x = initialPlanePositionX - plane.width;
   plane.y = initialPlanePositionY;
   plane.img.onload = function () {
@@ -43,7 +43,8 @@ function initPlane() {
   };
   pixelsPerMeter = canvasWidthPixels / simulationDistance;
   // La velocidad se calcula automáticamente basada en la distancia y el tiempo
-  plane.vx = (simulationDistance / Number(simulationTimeInput.value)) * pixelsPerMeter;
+  plane.vx =
+    (simulationDistance / Number(simulationTimeInput.value)) * pixelsPerMeter;
 }
 
 function initRuler() {
@@ -89,10 +90,9 @@ function updateAndDrawGraphs() {
 }
 
 function loadAndDrawImage() {
-  simulationDistance = 160; // Fijamos la distancia en 160 metros
-  simulationDistanceInput.value = simulationDistance;
-  simulationTimeInput.value = 2; // Fijamos el tiempo en 2 segundos
-  
+  simulationDistance = Number(distanceInput.value); // Fijamos la distancia en 160 metros
+  distanceInput.value = simulationDistance;
+  simulationTimeInput.value = Number(simulationTimeInput.value); // Fijamos el tiempo en 2 segundos
   background.image = new Image();
   background.image.onload = function () {
     background.draw(simulationDistance);
@@ -100,21 +100,21 @@ function loadAndDrawImage() {
     initPlane();
     initRuler();
   };
-  background.image.src = "/img/background.jpg";
+  background.image.src = "/img/background_plane.png";
   initGraphs();
 }
 
 function disableButtonsAndInputs() {
   startButton.disabled = true;
-  simulationDistanceInput.disabled = true;
-  speedInput.disabled = true;
+  // simulationDistanceInput.disabled = true;
+  // speedInput.disabled = true;
   simulationTimeInput.disabled = true;
 }
 
 function enableButtonsAndInputs() {
   startButton.disabled = false;
-  simulationDistanceInput.disabled = false;
-  speedInput.disabled = false;
+  // simulationDistanceInput.disabled = false;
+  // speedInput.disabled = false;
   simulationTimeInput.disabled = false;
 }
 
@@ -134,7 +134,7 @@ function init() {
 function handleAnimationEnd() {
   const modal = document.getElementById("modal");
   const modalText = document.getElementById("modalText");
-  const velocity = (simulationDistance / Number(simulationTimeInput.value));
+  const velocity = simulationDistance / Number(simulationTimeInput.value);
   modalText.textContent =
     "La velocidad del avión es: " + velocity.toFixed(0) + " m/s";
   modal.style.visibility = "visible";

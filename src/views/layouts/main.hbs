@@ -44,6 +44,15 @@
                 <p class="font-semibold">{{name}}</p>
               </a>
             </li>
+            {{#if simulation}}
+              <li class="nav-item px-2">
+                <a href="/simulations_mru">
+                  <p
+                    class="nav-link font-semibold border-2 border-white hover:bg-white hover:text-green-700 py-3 px-4 rounded-md"
+                  >Simulaciones</p>
+                </a>
+              </li>
+            {{/if}}
             <li class="nav-item px-2">
               <a
                 href="/logout"

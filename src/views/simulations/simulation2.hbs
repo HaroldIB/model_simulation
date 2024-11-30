@@ -16,20 +16,23 @@
       </div>
     </div>
     <p>
-      Dos móviles A y B separados 50 metros, parten simultáneamente del reposo
-      con MRU en la misma dirección y sentido. Si la velocidad del móvil que
-      está delante es de 2[m/s] y del otro es 5[m/s]. ¿Después de qué tiempo
-      medido en segundos la distancia entre ambos será de 10 metros por segunda
-      vez?
+      Un avión recorre
       <input
         type="number"
-        id="speedInput"
-        name="speedInput"
+        id="distanceInput"
+        name="distanceInput"
         min="1"
-        value="80"
+        value="1600"
+        oninput="updateValue(this.value)"
       />
-      <input type="number" id="simulationTime" value="5" />
-
+      <script>
+        function updateValue(value) {
+        document.getElementById("distanceInput").textContent = value; }
+      </script>
+      metros en
+      <input type="number" id="simulationTime" value="2" />
+      segundos, con un movimiento rectilíneo Uniforme. ¿Cuál es la velocidad del
+      avión en [m/s]?
     </p>
     <div class="controls">
       <!-- <label for="speedInput">Velocidad de la moto:</label> -->
@@ -41,8 +44,10 @@
   </div>
   <div class="main-container">
     <div class="simulation-container">
+
       <canvas id="canvas" width="700" height="300"></canvas>
-      <div class="params">
+
+      {{! <div class="params">
         <!-- <label for="simulationTime">Tiempo de simulación (segundos):</label> -->
         <label for="simulationDistance">Distancia de simulación (metros):</label>
         <input
@@ -60,7 +65,8 @@
           function updateValue(value) {
           document.getElementById("distanceValue").textContent = value; }
         </script>
-      </div>
+      </div> }}
+
     </div>
     <div class="graph-container">
       <div>
@@ -80,5 +86,5 @@
 <script src="/js/distanceDisplay.js"></script>
 <script src="/js/ruler.js"></script>
 <script src="/js/clock.js"></script>
-<script src="/js/imageMoto.js"></script>
+<script src="/js/imageParticle.js"></script>
 <script src="/js/animation2.js"></script>

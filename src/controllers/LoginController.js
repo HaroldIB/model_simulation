@@ -211,8 +211,12 @@ function storeUser(req, res) {
                             .send("Database insertion error.");
                         }
 
-                        req.session.loggedin = true;
-                        req.session.name = data.name;
+                        // req.session.loggedin = true;
+                        // req.session.name = data.name;
+                        req.flash(
+                          "success_msg",
+                          "Registro exitoso. Ahora inicie sesión."
+                        );
                         res.redirect("/");
                       }
                     );

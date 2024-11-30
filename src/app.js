@@ -11,6 +11,7 @@ const userRoutes = require("./routes/home_student");
 const simulationRoutes = require("./routes/simulation");
 const path = require("path");
 const app = express();
+const flash = require("connect-flash");
 
 // Configuramos el puerto en el que se ejecutará la aplicación
 app.set("port", process.env.PORT || 4000);
@@ -44,6 +45,14 @@ app.use(
 );
 
 app.use(session({ secret: "secret", resave: true, saveUninitialized: true })); // Configuramos la sesión
+
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  next();
+});
 
 // Iniciamos el servidor en el puerto configurado
 app.listen(app.get("port"), () => {

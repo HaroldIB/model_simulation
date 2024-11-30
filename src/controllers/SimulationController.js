@@ -57,7 +57,10 @@ function simulation(req, res) {
       );
     });
 
-    res.render("simulations/simulation", { name: req.session.name });
+    res.render("simulations/simulation", {
+      name: req.session.name,
+      simulation: req.session.name,
+    });
   } else {
     res.redirect("/login");
   }
