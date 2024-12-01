@@ -27,7 +27,7 @@ function auth(req, res) {
     }
 
     conn.query(
-      "SELECT * FROM Usuario WHERE email_u = ?",
+      "SELECT * FROM usuario WHERE email_u = ?",
       [data.email],
       (err, userdata) => {
         if (err) {
@@ -67,9 +67,9 @@ function auth(req, res) {
                 const [numeroIngresoResult] = await new Promise(
                   (resolve, reject) => {
                     conn.query(
-                      "SELECT MAX(eus.numero_ingreso) AS maxIngreso FROM Estudiante_Datos_Uso_Sistema eus " +
-                        "JOIN Estudiante e ON eus.id_estudiante = e.id_estudiante " +
-                        "JOIN Usuario u ON e.id_usuario = u.id_usuario WHERE u.id_usuario = ?",
+                      "SELECT MAX(eus.numero_ingreso) AS maxIngreso FROM estudiante_datos_uso_sistema eus " +
+                        "JOIN estudiante e ON eus.id_estudiante = e.id_estudiante " +
+                        "JOIN usuario u ON e.id_usuario = u.id_usuario WHERE u.id_usuario = ?",
                       [user.id_usuario],
                       (err, result) => {
                         if (err) reject(err);
@@ -87,8 +87,8 @@ function auth(req, res) {
                 const [estudianteResult] = await new Promise(
                   (resolve, reject) => {
                     conn.query(
-                      "SELECT e.id_estudiante FROM Estudiante e " +
-                        "JOIN Usuario u ON e.id_usuario = u.id_usuario WHERE u.id_usuario = ?",
+                      "SELECT e.id_estudiante FROM estudiante e " +
+                        "JOIN usuario u ON e.id_usuario = u.id_usuario WHERE u.id_usuario = ?",
                       [user.id_usuario],
                       (err, result) => {
                         if (err) reject(err);
@@ -154,7 +154,7 @@ function storeUser(req, res) {
       return res.status(500).send("Database connection error.");
     }
     conn.query(
-      "SELECT * FROM Usuario WHERE email_u = ?",
+      "SELECT * FROM usuario WHERE email_u = ?",
       [data.email],
       (err, userdata) => {
         if (err) {
@@ -182,7 +182,7 @@ function storeUser(req, res) {
                 }
 
                 conn.query(
-                  "INSERT INTO Usuario SET ?",
+                  "INSERT INTO usuario SET ?",
                   [userData],
                   (err, result) => {
                     if (err) {
@@ -198,7 +198,7 @@ function storeUser(req, res) {
                     };
 
                     conn.query(
-                      "INSERT INTO Estudiante SET ?",
+                      "INSERT INTO estudiante SET ?",
                       [studentData],
                       (err, rows) => {
                         if (err) {
