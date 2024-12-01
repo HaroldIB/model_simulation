@@ -5,6 +5,7 @@ class ImageParticle {
     this.x = 0;
     this.y = 0;
     this.vx = 0;
+    this.ax = 0;
     this.width = width;
     this.height = height;
   }

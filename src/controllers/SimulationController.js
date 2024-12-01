@@ -156,6 +156,14 @@ function simulation2(req, res) {
   }
 }
 
+function simulation3(req, res) {
+  if (req.session.loggedin) {
+    res.render("simulations/simulation3", { name: req.session.name });
+  } else {
+    res.redirect("/login");
+  }
+}
+
 function simulationMRU(req, res) {
   if (req.session.loggedin) {
     res.render("simulations_mru", { name: req.session.name });
@@ -163,9 +171,37 @@ function simulationMRU(req, res) {
     res.redirect("/");
   }
 }
+
+function simulationMRUV(req, res) {
+  if (req.session.loggedin) {
+    res.render("simulations_mruv", { name: req.session.name });
+  } else {
+    res.redirect("/");
+  }
+}
+
+function simulation_mruv(req, res) {
+  if (req.session.loggedin) {
+    res.render("simulations/simulation_mruv", { name: req.session.name });
+  } else {
+    res.redirect("/login");
+  }
+}
+
+function simulation2_mruv(req, res) {
+  if (req.session.loggedin) {
+    res.render("simulations/simulation2_mruv", { name: req.session.name });
+  } else {
+    res.redirect("/login");
+  }
+}
 module.exports = {
   simulation,
   simulation2,
+  simulation3,
+  simulation_mruv,
+  simulation2_mruv,
   simulationMRU,
+  simulationMRUV,
   guardarDatosSimulacion,
 };

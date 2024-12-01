@@ -1,0 +1,118 @@
+<div class="container">
+  <h1>PRIMER PROBLEMA DE MOVIMIENTO RECTILÍNEO UNIFORMEMENTE VARIADO</h1>
+
+  <div class="content">
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <p id="modalText"></p>
+        <button id="modalButton">Confirmar</button>
+      </div>
+    </div>
+
+    <div id="alertModal" class="modal">
+      <div class="modal-content">
+        <p id="alertModalText"></p>
+        <button id="confirmButton">Continuar</button>
+        <button id="cancelButton">Corregir</button>
+      </div>
+    </div>
+
+    <p>
+      Un camión parte del reposo con una aceleración de
+      <input
+        type="number"
+        id="acelerationInput"
+        name="acelerationInput"
+        min="1"
+        value="3"
+      />
+      . ¿Cuál será su velocidad final y la distancia recorrida por el camión
+      despues de
+      <input
+        type="number"
+        id="timeInput"
+        name="timeInput"
+        min="1"
+        value="12"
+      />[s]?.
+
+    </p>
+
+    <div class="controls">
+      <!-- <label for="speedInput">Velocidad de la moto:</label> -->
+      <button id="startButton" class="startButton">
+        Iniciar simulación
+      </button>
+      <button id="endButton" class="endButton">Terminar simulación</button>
+    </div>
+  </div>
+
+  <div class="main-container">
+
+    <style>
+      #canvas { transition: transform 0.3s ease; } #canvas:hover { transform:
+      scale(1.1); /* Aumenta ligeramente el tamaño */ } .canvas { transition:
+      width 0.3s ease, height 0.3s ease; background-color: white;} .fullscreen {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index:
+      1000; } .container { position: relative; }
+
+    </style>
+
+    <div class="simulation-container">
+      <canvas id="canvas" width="700" height="300"></canvas>
+      <div class="params">
+        <!-- <label for="simulationTime">Tiempo de simulación (segundos):</label> -->
+        <label for="simulationDistance">Distancia de simulación (metros):</label>
+        <input
+          type="range"
+          id="simulationDistance"
+          min="500"
+          max="6325"
+          value="1000"
+          oninput="updateValue(this.value)"
+        />
+        <span id="distanceValue">1000</span>
+        <!-- Cambia este valor a 1000 -->
+
+        <script>
+          function updateValue(value) {
+          document.getElementById("distanceValue").textContent = value; }
+        </script>
+      </div>
+    </div>
+    <div class="graph-container">
+      <div>
+        <h2>Gráfica Distancias Vs. Tiempo</h2>
+        <canvas id="graphCanvas" width="400" height="300"></canvas>
+      </div>
+      <div>
+        <h2>Gráfica Velocidad Vs. Tiempo</h2>
+        <canvas id="velocityGraphCanvas" width="400" height="300"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => { const canvasMain =
+    document.getElementById('canvas'); const canvases =
+    document.querySelectorAll('canvas'); let activeCanvas = null;
+    canvases.forEach(canvas => { if (canvas !== canvasMain) {
+    canvas.classList.add('canvas'); canvas.addEventListener('click', () => {
+    const container = canvas.closest('.container'); if (!activeCanvas) { if
+    (container) { canvas.style.width = `${container.clientWidth}px`;
+    canvas.style.height = `${container.clientHeight}px`; }
+    canvas.classList.add('fullscreen'); activeCanvas = canvas; } else if
+    (activeCanvas === canvas) { canvas.classList.remove('fullscreen');
+    canvas.style.width = ''; canvas.style.height = ''; activeCanvas = null; }
+    }); } }); });
+  </script>
+</div>
+
+<script src="/js/graph.js"></script>
+<script src="/js/background.js"></script>
+<script src="/js/distanceDisplay.js"></script>
+<script src="/js/ruler.js"></script>
+<script src="/js/clock.js"></script>
+<script src="/js/imageParticle.js"></script>
+<script src="/js/animation2_mruv.js"></script>

@@ -1,0 +1,78 @@
+<div class="container">
+  <h1>TERCER PROBLEMA DE MOVIMIENTO RECTILÍNEO UNIFORME</h1>
+  <div class="content">
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <p id="modalText"></p>
+        <button id="modalButton">Confirmar</button>
+      </div>
+    </div>
+
+    <div id="alertModal" class="modal">
+      <div class="modal-content">
+        <p id="alertModalText"></p>
+        <button id="confirmButton">Continuar</button>
+        <button id="cancelButton">Corregir</button>
+      </div>
+    </div>
+    <p>
+      Un tren de
+      <input
+        type="number"
+        id="largeInput"
+        name="largeInput"
+        min="1"
+        value="100"
+        oninput="updateValue(this.value)"
+      />
+      <script>
+        function updateValue(value) {
+        document.getElementById("distanceInput").textContent = value; }
+      </script>
+      metros de longitud viaja a velocidad constante de módulo
+      <input type="number" id="speedInput" name="speedInput" value="20" />
+      [m/s], ¿Qué tiempo demorará en cruzar completamente un tunel recto de
+      <input
+        type="number"
+        id="distanceInput"
+        name="distanceInput"
+        min="1"
+        value="200"
+        oninput="updateValue(this.value)"
+      />
+      metros?
+    </p>
+    <div class="controls">
+      <!-- <label for="speedInput">Velocidad de la moto:</label> -->
+      <button id="startButton" class="startButton">
+        Iniciar simulación
+      </button>
+      <button id="endButton" class="endButton">Terminar simulación</button>
+    </div>
+  </div>
+  <div class="main-container">
+    <div class="simulation-container">
+
+      <canvas id="canvas" width="700" height="300"></canvas>
+
+    </div>
+    <div class="graph-container">
+      <div>
+        <h2>Gráfica Distancias Vs. Tiempo</h2>
+        <canvas id="graphCanvas" width="400" height="300"></canvas>
+      </div>
+      <div>
+        <h2>Gráfica Velocidad Vs. Tiempo</h2>
+        <canvas id="velocityGraphCanvas" width="400" height="300"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/graph.js"></script>
+<script src="/js/background.js"></script>
+<script src="/js/distanceDisplay.js"></script>
+<script src="/js/ruler.js"></script>
+<script src="/js/clock.js"></script>
+<script src="/js/imageParticle.js"></script>
+<script src="/js/animation3.js"></script>
