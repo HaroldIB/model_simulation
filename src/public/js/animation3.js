@@ -2,13 +2,12 @@
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 const startButton = document.getElementById("startButton");
+const endButton = document.getElementById("endButton");
+
 const largeInput = document.getElementById("largeInput");
 const speedInput = document.getElementById("speedInput");
 const distanceInput = document.getElementById("distanceInput");
 
-const simulationTimeInput = document.getElementById("simulationTime");
-const simulationDistanceInput = document.getElementById("simulationDistance");
-const endButton = document.getElementById("endButton");
 const velocityGraphCanvas = document.getElementById("velocityGraphCanvas");
 const velocityGraphContext = velocityGraphCanvas.getContext("2d");
 const graphCanvas = document.getElementById("graphCanvas");
@@ -26,17 +25,17 @@ let animationId;
 let canvasWidthPixels = canvas.width - 100;
 let pixelsPerMeter;
 let simulationDistance;
-let trainHeight = 120;
+let trainHeight = 100;
 let trainWidth = 150;
 
-let tunelHeight = 140;
+let tunelHeight = 120;
 let tunelWidth = 300;
 
 let graph;
 let velocityGraph;
 let shouldStartSimulation = true;
 const initialPlanePositionX = 50;
-const initialPlanePositionY = 150;
+const initialPlanePositionY = 170;
 const framesPerSecond = 60;
 const fixedDeltaTime = 1 / 60;
 
@@ -52,7 +51,7 @@ function initTrain() {
   tunel.x =
     initialPlanePositionX +
     (Number(largeInput.value) * canvasWidthPixels) / simulationDistance;
-  tunel.y = initialPlanePositionY;
+  tunel.y = initialPlanePositionY - 13;
   tunel.img.onload = function () {
     tunel.draw(context);
   };
@@ -70,9 +69,11 @@ function initRuler() {
     simulationDistance,
     10,
     initialPlanePositionY + trainHeight,
-    initialPlanePositionX,
+    initialPlanePositionX +
+      (Number(largeInput.value) * canvasWidthPixels) / simulationDistance,
     canvasWidthPixels
   );
+  ruler.color = "white";
   ruler.draw(context);
 }
 
@@ -109,11 +110,17 @@ function updateAndDrawGraphs() {
   velocityGraph.draw();
 }
 
+function updateLargeInputValue(value) {
+  document.getElementById("largeInput").textContent = value;
+  loadAndDrawImage(value); // Llamamos a la función para actualizar el fondo y otras configuraciones
+}
+function updateDistanceInputValue(value) {
+  document.getElementById("distanceInput").value = value;
+  loadAndDrawImage(value); // Llamamos a la función para actualizar el fondo y otras configuraciones
+}
 function loadAndDrawImage() {
   simulationDistance =
     Number(distanceInput.value) + 2 * Number(largeInput.value);
-  // distanceInput.value = simulationDistance;
-  // simulationTimeInput.value = Number(simulationTimeInput.value); // Fijamos el tiempo en 2 segundos
   background.image = new Image();
   background.image.onload = function () {
     background.draw(simulationDistance);
@@ -127,16 +134,16 @@ function loadAndDrawImage() {
 
 function disableButtonsAndInputs() {
   startButton.disabled = true;
-  // simulationDistanceInput.disabled = true;
-  // speedInput.disabled = true;
-  // simulationTimeInput.disabled = true;
+  largeInput.disabled = true;
+  speedInput.disabled = true;
+  distanceInput.disabled = true;
 }
 
 function enableButtonsAndInputs() {
   startButton.disabled = false;
-  // simulationDistanceInput.disabled = false;
-  // speedInput.disabled = false;
-  // simulationTimeInput.disabled = false;
+  largeInput.disabled = false;
+  speedInput.disabled = false;
+  distanceInput.disabled = false;
 }
 
 function init() {
@@ -204,15 +211,78 @@ function endSimulation() {
   enableButtonsAndInputs();
 }
 
+function showModal(message, disableConfirmButton) {
+  const modal = document.getElementById("alertModal");
+  const modalText = document.getElementById("alertModalText");
+  const confirmButton = document.getElementById("confirmButton");
+  modalText.textContent = message;
+  modal.style.display = "flex";
+  confirmButton.disabled = disableConfirmButton;
+}
+// Controladores de eventos
+document.getElementById("modalButton").onclick = function () {
+  document.getElementById("modal").style.visibility = "hidden";
+};
+document.getElementById("confirmButton").onclick = function () {
+  document.getElementById("alertModal").style.display = "none"; // Cambia 'visibility' a 'display'
+  shouldStartSimulation = true;
+  if (shouldStartSimulation) {
+    init();
+  }
+};
+document.getElementById("cancelButton").onclick = function () {
+  document.getElementById("alertModal").style.display = "none"; // Cierra el mensaje
+  shouldStartSimulation = false; // Evita que la simulación se inicie
+};
+
 // Controladores de eventos
 document.getElementById("modalButton").onclick = function () {
   document.getElementById("modal").style.visibility = "hidden";
 };
 
 startButton.addEventListener("click", function () {
-  init();
-});
+  const speed = Number(speedInput.value);
+  const largeTrain = Number(largeInput.value);
+  const simulationDistance = Number(distanceInput.value);
 
+  if (
+    speed <= 0 ||
+    largeTrain <= 0 ||
+    simulationDistance <= 0 ||
+    isNaN(speed) ||
+    isNaN(largeTrain) ||
+    isNaN(simulationDistance) ||
+    speedInput.value.includes("e") ||
+    distanceInput.value.includes("e") ||
+    largeInput.value.includes("e") ||
+    speedInput.value === "" ||
+    distanceInput.value === "" ||
+    largeInput.value === "" ||
+    speedInput.value.includes("+") ||
+    distanceInput.value.includes("+") ||
+    largeInput.value.includes("+") ||
+    speedInput.value.includes(",") ||
+    distanceInput.value.includes(",") ||
+    largeInput.value.includes(",")
+  ) {
+    showModal(
+      "Valor incorrecto. Por favor, ingresa un número no negativo.",
+      true
+    );
+    return;
+  }
+
+  if (Number(distanceInput.value) + 2 * Number(largeInput.value) > 2000) {
+    showModal(
+      "La Distancia de Simulación es muy grande!!. " +
+        "Esto puede resultar en que no se la simulación correctamente. " +
+        "¿Deseas continuar de todos modos?",
+      false
+    );
+  } else {
+    init();
+  }
+});
 endButton.addEventListener("click", endSimulation);
 
 // Inicialización

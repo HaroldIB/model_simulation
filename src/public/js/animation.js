@@ -1,11 +1,14 @@
 // Obtener elementos del DOM
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
+
 const startButton = document.getElementById("startButton");
+const endButton = document.getElementById("endButton");
+
 const speedInput = document.getElementById("speedInput");
 const simulationTimeInput = document.getElementById("simulationTime");
 const simulationDistanceInput = document.getElementById("simulationDistance");
-const endButton = document.getElementById("endButton");
+
 const velocityGraphCanvas = document.getElementById("velocityGraphCanvas");
 const velocityGraphContext = velocityGraphCanvas.getContext("2d");
 const graphCanvas = document.getElementById("graphCanvas");
@@ -123,7 +126,8 @@ function init() {
 function handleAnimationEnd() {
   const modal = document.getElementById("modal");
   const modalText = document.getElementById("modalText");
-  const distanceInMeters = distanceDisplay.distance / pixelsPerMeter;
+  const distanceInMeters =
+    Number(speedInput.value) * Number(simulationTimeInput.value);
   modalText.textContent =
     "La distancia alcanzada por el motociclista es: " +
     distanceInMeters.toFixed(0) +
@@ -255,4 +259,4 @@ simulationDistanceInput.addEventListener("input", loadAndDrawImage);
 
 // Inicialización
 window.onload = loadAndDrawImage;
-background = new Background("img/background.jpg", canvas, context);
+background = new Background("/img/background.jpg", canvas, context);

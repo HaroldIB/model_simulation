@@ -4,9 +4,9 @@ const context = canvas.getContext("2d");
 const startButton = document.getElementById("startButton");
 const endButton = document.getElementById("endButton");
 
-// const speedInput = document.getElementById("speedInput");
-const simulationTimeInput = document.getElementById("timeInput");
+const speedInput = document.getElementById("sppedInput");
 const simulationAcelerationInput = document.getElementById("acelerationInput");
+const simulationTimeInput = document.getElementById("timeInput");
 const simulationDistanceInput = document.getElementById("simulationDistance");
 
 const velocityGraphCanvas = document.getElementById("velocityGraphCanvas");
@@ -32,7 +32,7 @@ let graph;
 let velocityGraph;
 let shouldStartSimulation = true;
 const initialCamionPositionX = 50;
-const initialCamionPositionY = 200;
+const initialCamionPositionY = 150;
 const framesPerSecond = 60;
 const fixedDeltaTime = 1 / 60;
 
@@ -46,8 +46,8 @@ function initMoto() {
     camion.draw(context);
   };
   pixelsPerMeter = canvasWidthPixels / simulationDistance;
+  camion.vx = Number(sppedInput.value) * pixelsPerMeter;
   camion.ax = Number(simulationAcelerationInput.value) * pixelsPerMeter;
-  // camion.vx = (Number(simulationAcelerationInput) || 2) * pixelsPerMeter;
 }
 function initRuler() {
   ruler = new Ruler(
@@ -57,6 +57,7 @@ function initRuler() {
     initialCamionPositionX,
     canvasWidthPixels
   );
+  ruler.color = "white";
   ruler.draw(context);
 }
 
@@ -64,8 +65,9 @@ function initGraphs() {
   const maxTime = Number(simulationTimeInput.value);
   const maxDistance = simulationDistance;
   const maxSpeed =
+    Number(sppedInput.value) +
     Number(simulationAcelerationInput.value) *
-    Number(simulationTimeInput.value);
+      Number(simulationTimeInput.value);
   graph = new Graph(
     graphCanvas,
     graphContext,
@@ -92,12 +94,9 @@ function updateAndDrawGraphs() {
   velocityGraph.addPoint(time, speed);
   velocityGraph.draw();
 }
+
 function loadAndDrawImage() {
-  simulationDistance =
-    0.5 *
-    Number(simulationAcelerationInput.value) *
-    Number(simulationTimeInput.value) *
-    Number(simulationTimeInput.value);
+  simulationDistance = Number(simulationDistanceInput.value);
   background.image = new Image();
   background.image.onload = function () {
     background.draw(simulationDistance);
@@ -110,14 +109,16 @@ function loadAndDrawImage() {
 }
 function disableButtonsAndInputs() {
   startButton.disabled = true;
+  simulationAcelerationInput.disabled = true;
   simulationDistanceInput.disabled = true;
-  // speedInput.disabled = true;
+  speedInput.disabled = true;
   simulationTimeInput.disabled = true;
 }
 function enableButtonsAndInputs() {
   startButton.disabled = false;
+  simulationAcelerationInput.disabled = false;
   simulationDistanceInput.disabled = false;
-  // speedInput.disabled = false;
+  speedInput.disabled = false;
   simulationTimeInput.disabled = false;
 }
 function init() {
@@ -132,14 +133,20 @@ function init() {
   totalFrames = framesPerSecond * Number(simulationTimeInput.value);
   animFrame();
 }
+
 function handleAnimationEnd() {
   const modal = document.getElementById("modal");
   const modalText = document.getElementById("modalText");
-  const distanceInMeters = distanceDisplay.distance / pixelsPerMeter;
+  const distanceInMeters =
+    Number(sppedInput.value) * Number(simulationTimeInput.value) +
+    0.5 *
+      Number(simulationAcelerationInput.value) *
+      Number(simulationTimeInput.value) *
+      Number(simulationTimeInput.value);
   modalText.textContent =
-    "La distancia alcanzada por el motociclista es: " +
+    "La distancia que recorre la bola de billar es: " +
     distanceInMeters.toFixed(0) +
-    " m";
+    " [m]";
   modal.style.visibility = "visible";
   enableButtonsAndInputs();
 }
@@ -204,27 +211,33 @@ document.getElementById("cancelButton").onclick = function () {
 
 startButton.addEventListener("click", function () {
   const aceleration = Number(simulationAcelerationInput.value);
-  // const speed = Number(speedInput.value);
+  const speed = Number(speedInput.value);
   const simulationTime = Number(simulationTimeInput.value);
   const simulationDistance = Number(simulationDistanceInput.value);
 
   if (
-    aceleration < 0 ||
-    simulationTime < 0 ||
-    simulationDistance < 0 ||
+    speed <= 0 ||
+    aceleration <= 0 ||
+    simulationTime <= 0 ||
+    simulationDistance <= 0 ||
+    isNaN(speed) ||
     isNaN(aceleration) ||
     isNaN(simulationTime) ||
     isNaN(simulationDistance) ||
-    //  .value.includes("e") ||
+    simulationAcelerationInput.value.includes("e") ||
+    sppedInput.value.includes("e") ||
     simulationTimeInput.value.includes("e") ||
     simulationDistanceInput.value.includes("e") ||
-    // speedInput.value === "" ||
+    simulationAcelerationInput.value === "" ||
+    sppedInput.value === "" ||
     simulationTimeInput.value === "" ||
     simulationDistanceInput.value === "" ||
-    // speedInput.value.includes("+") ||
+    simulationAcelerationInput.value.includes("+") ||
+    sppedInput.value.includes("+") ||
     simulationTimeInput.value.includes("+") ||
     simulationDistanceInput.value.includes("+") ||
-    // speedInput.value.includes(",") ||
+    simulationAcelerationInput.value.includes(",") ||
+    speedInput.value.includes(",") ||
     simulationTimeInput.value.includes(",") ||
     simulationDistanceInput.value.includes(",")
   ) {
@@ -235,7 +248,14 @@ startButton.addEventListener("click", function () {
     return;
   }
 
-  if (aceleration * simulationTime > simulationDistance) {
+  if (
+    Number(sppedInput.value) * Number(simulationTimeInput.value) +
+      0.5 *
+        Number(simulationAcelerationInput.value) *
+        Number(simulationTimeInput.value) *
+        Number(simulationTimeInput.value) >
+    simulationDistance
+  ) {
     showModal(
       "La Distancia de Simulación es muy pequeña!!. " +
         "Esto puede resultar en que no se vea toda la simulación. " +

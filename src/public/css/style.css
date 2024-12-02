@@ -115,10 +115,11 @@ label {
   text-align: center;
 }
 
-.graph-container h2 {
+/* .graph-container h2 {
   color: #333;
   font-size: 1.5rem;
-}
+} */
+
 /* Estilos para los parámetros */
 .params {
   text-align: center;
@@ -151,10 +152,10 @@ label {
 .graph-container {
   width: 100%;
 }
-.graph-container h2 {
+/* .graph-container h2 {
   color: #333;
-  font-size: 1rem; /* Cambia esto al tamaño que prefieras */
-}
+  font-size: 1rem; 
+} */
 
 .simulation-container {
   display: flex;
@@ -232,4 +233,35 @@ label {
   padding: 10px 20px;
   margin: 10px;
   cursor: pointer;
+}
+
+#carousel {
+  display: flex;
+  transition: transform 0.7s ease-in-out;
+}
+#carousel > div {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+#canvas {
+  transition: transform 0.3s ease;
+}
+#canvas:hover {
+  transform: scale(1.1);
+}
+.canvas {
+  transition: width 0.3s ease, height 0.3s ease;
+  background-color: white;
+}
+.fullscreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+.container {
+  position: relative;
 }

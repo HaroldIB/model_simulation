@@ -1,5 +1,8 @@
 <div class="container">
-  <h1>SEGUNDO PROBLEMA DE MOVIMIENTO RECTILÍNEO UNIFORME</h1>
+  <h1
+    class="text-center text-1xl sm:text-1xl font-extrabold text-indigo-800 bg-gradient-to-r from-indigo-500 via-blue-500 to-green-500 text-transparent bg-clip-text py-3 sm:py-4 shadow-lg"
+  >SEGUNDO PROBLEMA DE MOVIMIENTO RECTILÍNEO UNIFORME</h1>
+
   <div class="content">
     <div id="modal" class="modal">
       <div class="modal-content">
@@ -15,9 +18,12 @@
         <button id="cancelButton">Corregir</button>
       </div>
     </div>
-    <p>
-      Un avión recorre
+
+    <p style="text-align: justify;">
+      Un avión comercial de la aerolínea BoA que se dirige de La Paz a Santa
+      Cruz, con un movimiento rectilíneo uniforme logra recorrer
       <input
+        class="w-20 px-3 py-2 border-2 border-indigo-300 rounded-lg text-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
         type="number"
         id="distanceInput"
         name="distanceInput"
@@ -29,11 +35,20 @@
         function updateValue(value) {
         document.getElementById("distanceInput").textContent = value; }
       </script>
-      metros en
-      <input type="number" id="simulationTime" value="2" />
-      segundos, con un movimiento rectilíneo Uniforme. ¿Cuál es la velocidad del
-      avión en [m/s]?
+      <span class="font-math" title="metros">[m]</span>
+      en
+      <input
+        class="w-20 px-3 py-2 border-2 border-indigo-300 rounded-lg text-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
+        type="number"
+        id="simulationTime"
+        name="simulationTime"
+        value="2"
+      />
+      <span class="font-math" title="segundos">[s]</span>.
+      <b>¿Cuál es la velocidad del avión en
+        <span class="font-math" title="metros sobre segundo">[m/s]</span>?</b>
     </p>
+
     <div class="controls">
       <!-- <label for="speedInput">Velocidad de la moto:</label> -->
       <button id="startButton" class="startButton">
@@ -42,45 +57,30 @@
       <button id="endButton" class="endButton">Terminar simulación</button>
     </div>
   </div>
+
   <div class="main-container">
     <div class="simulation-container">
 
       <canvas id="canvas" width="700" height="300"></canvas>
 
-      {{! <div class="params">
-        <!-- <label for="simulationTime">Tiempo de simulación (segundos):</label> -->
-        <label for="simulationDistance">Distancia de simulación (metros):</label>
-        <input
-          type="range"
-          id="simulationDistance"
-          min="500"
-          max="6325"
-          value="1000"
-          oninput="updateValue(this.value)"
-        />
-        <span id="distanceValue">1000</span>
-        <!-- Cambia este valor a 1000 -->
-
-        <script>
-          function updateValue(value) {
-          document.getElementById("distanceValue").textContent = value; }
-        </script>
-      </div> }}
-
     </div>
     <div class="graph-container">
+      <h2 class="text-indigo-900 text-sm font-semibold underline">GRÁFICAS</h2>
       <div>
-        <h2>Gráfica Distancias Vs. Tiempo</h2>
+        <h2 class="text-indigo-800 text-sm italic font-semibold">
+          Distancias Vs. Tiempo</h2>
         <canvas id="graphCanvas" width="400" height="300"></canvas>
       </div>
       <div>
-        <h2>Gráfica Velocidad Vs. Tiempo</h2>
+        <h2 class="text-indigo-800 text-sm italic font-semibold">
+          Velocidad Vs. Tiempo</h2>
         <canvas id="velocityGraphCanvas" width="400" height="300"></canvas>
       </div>
     </div>
   </div>
-</div>
 
+</div>
+<script src="/js/simulation.js"></script>
 <script src="/js/graph.js"></script>
 <script src="/js/background.js"></script>
 <script src="/js/distanceDisplay.js"></script>

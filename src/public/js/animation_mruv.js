@@ -4,7 +4,6 @@ const context = canvas.getContext("2d");
 const startButton = document.getElementById("startButton");
 const endButton = document.getElementById("endButton");
 
-// const speedInput = document.getElementById("speedInput");
 const simulationTimeInput = document.getElementById("timeInput");
 const simulationAcelerationInput = document.getElementById("acelerationInput");
 const simulationDistanceInput = document.getElementById("simulationDistance");
@@ -26,13 +25,13 @@ let animationId;
 let canvasWidthPixels = canvas.width - 100;
 let pixelsPerMeter;
 let simulationDistance;
-let camionHeight = 40;
-let camionWidth = 40;
+let camionHeight = 80;
+let camionWidth = 100;
 let graph;
 let velocityGraph;
 let shouldStartSimulation = true;
 const initialCamionPositionX = 50;
-const initialCamionPositionY = 200;
+const initialCamionPositionY = 150;
 const framesPerSecond = 60;
 const fixedDeltaTime = 1 / 60;
 
@@ -47,8 +46,8 @@ function initMoto() {
   };
   pixelsPerMeter = canvasWidthPixels / simulationDistance;
   camion.ax = Number(simulationAcelerationInput.value) * pixelsPerMeter;
-  // camion.vx = (Number(simulationAcelerationInput) || 2) * pixelsPerMeter;
 }
+
 function initRuler() {
   ruler = new Ruler(
     simulationDistance,
@@ -92,12 +91,9 @@ function updateAndDrawGraphs() {
   velocityGraph.addPoint(time, speed);
   velocityGraph.draw();
 }
+
 function loadAndDrawImage() {
-  simulationDistance =
-    0.5 *
-    Number(simulationAcelerationInput.value) *
-    Number(simulationTimeInput.value) *
-    Number(simulationTimeInput.value);
+  simulationDistance = Number(simulationDistanceInput.value);
   background.image = new Image();
   background.image.onload = function () {
     background.draw(simulationDistance);
@@ -135,11 +131,20 @@ function init() {
 function handleAnimationEnd() {
   const modal = document.getElementById("modal");
   const modalText = document.getElementById("modalText");
-  const distanceInMeters = distanceDisplay.distance / pixelsPerMeter;
+  const distanceInMeters =
+    0.5 *
+    Number(simulationAcelerationInput.value) *
+    Number(simulationTimeInput.value) *
+    Number(simulationTimeInput.value);
+  const speedInMeters =
+    Number(simulationAcelerationInput.value) *
+    Number(simulationTimeInput.value);
   modalText.textContent =
-    "La distancia alcanzada por el motociclista es: " +
+    "La velocidada que alcanza el camión es: " +
+    speedInMeters.toFixed(0) +
+    " [m/s], y la distancia que recorrió es:" +
     distanceInMeters.toFixed(0) +
-    " m";
+    " [m] ";
   modal.style.visibility = "visible";
   enableButtonsAndInputs();
 }
@@ -204,27 +209,26 @@ document.getElementById("cancelButton").onclick = function () {
 
 startButton.addEventListener("click", function () {
   const aceleration = Number(simulationAcelerationInput.value);
-  // const speed = Number(speedInput.value);
   const simulationTime = Number(simulationTimeInput.value);
   const simulationDistance = Number(simulationDistanceInput.value);
 
   if (
-    aceleration < 0 ||
-    simulationTime < 0 ||
-    simulationDistance < 0 ||
+    aceleration <= 0 ||
+    simulationTime <= 0 ||
+    simulationDistance <= 0 ||
     isNaN(aceleration) ||
     isNaN(simulationTime) ||
     isNaN(simulationDistance) ||
-    //  .value.includes("e") ||
+    simulationAcelerationInput.value.includes("e") ||
     simulationTimeInput.value.includes("e") ||
     simulationDistanceInput.value.includes("e") ||
-    // speedInput.value === "" ||
+    simulationAcelerationInput.value == "" ||
     simulationTimeInput.value === "" ||
     simulationDistanceInput.value === "" ||
-    // speedInput.value.includes("+") ||
+    simulationAcelerationInput.value.includes("+") ||
     simulationTimeInput.value.includes("+") ||
     simulationDistanceInput.value.includes("+") ||
-    // speedInput.value.includes(",") ||
+    simulationAcelerationInput.value.includes(",") ||
     simulationTimeInput.value.includes(",") ||
     simulationDistanceInput.value.includes(",")
   ) {
@@ -235,7 +239,10 @@ startButton.addEventListener("click", function () {
     return;
   }
 
-  if (aceleration * simulationTime > simulationDistance) {
+  if (
+    aceleration * simulationTime * simulationTime * 0.5 >
+    simulationDistance
+  ) {
     showModal(
       "La Distancia de Simulación es muy pequeña!!. " +
         "Esto puede resultar en que no se vea toda la simulación. " +

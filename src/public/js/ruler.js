@@ -7,10 +7,11 @@ class Ruler {
     this.offsetX = offsetX;
     this.totalWidth = totalWidth;
     this.spacing = this.totalWidth / this.marks;
+    this.color = "blue";
   }
 
   draw(context) {
-    context.fillStyle = "blue"; // Cambia esto al color que prefieras para las marcas de la regla
+    context.fillStyle = this.color; // Cambia esto al color que prefieras para las marcas de la regla
     context.font = "12px Arial"; // Cambia esto al tamaño y tipo de letra que prefieras
 
     context.fillRect(this.offsetX, this.startY, this.totalWidth, 1);

@@ -1,36 +1,100 @@
 <h1
-  class="text-center my-8 sm:my-24 text-4xl sm:text-6xl font-bold text-purple-700"
+  class="text-center mt-8 sm:mt-24 text-4xl sm:text-6xl font-bold text-purple-700"
 >
   Bienvenido
   <b class="text-yellow-500">{{name}}</b>
 </h1>
+<h2 class="text-center text-white text-2xl animate-pulse">
+  ¡Adelante! Selecciona un problema de MRUV para simular y descubre todas sus
+  variantes.
+</h2>
 <div
   class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4"
 >
   <a
     href="simulations/simulation_mruv"
-    class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    class="inline-block bg-gradient-to-r from-green-500 via-green-400 to-green-700 hover:from-green-700 hover:via-green-400 hover:to-green-500 text-white font-bold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
   >
     PRIMER PROBLEMA MRUV
   </a>
   <a
     href="simulations/simulation2_mruv"
-    class="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+    class="inline-block bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-orange-500 hover:via-pink-500 hover:to-purple-500 text-white font-bold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
   >
     SEGUNDO PROBLEMA MRUV
   </a>
   <a
     href="simulations/simulation3"
-    class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    class="inline-block bg-gradient-to-r from-indigo-500 via-indigo-400 to-indigo-700 hover:from-indigo-700 hover:via-indigo-400 hover:to-indigo-500 text-white font-bold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
   >
     TERCER PROBLEMA MRUV
   </a>
 </div>
+
+<!-- Carrusel de imágenes -->
+<div class="mt-8 relative w-full max-w-4xl mx-auto overflow-hidden">
+  <div id="carousel" class="flex transition-transform duration-700 ease-in-out">
+    <!-- Imagen 1 con título -->
+    <div class="w-full flex-shrink-0 relative">
+      <img
+        class="w-4/5 mx-auto h-auto object-contain border-4 border-indigo-900 rounded-lg shadow-lg"
+        src="/img/image1_mruv.png"
+        alt="Imagen 1"
+      />
+      <div
+        class="absolute top-0 left-0 right-0 flex items-center justify-center text-black font-bold text-2xl italic p-2"
+      >Primer Problema MRUV</div>
+    </div>
+    <!-- Imagen 2 con título -->
+    <div class="w-full flex-shrink-0 relative">
+      <img
+        class="w-4/5 mx-auto h-auto object-contain border-4 border-indigo-900 rounded-lg shadow-lg"
+        src="/img/image2_mruv.png"
+        alt="Imagen 2"
+      />
+      <div
+        class="absolute top-0 left-0 right-0 flex items-center justify-center text-black font-bold text-2xl italic p-2"
+      >Segundo Problema MRUV</div>
+    </div>
+    <!-- Imagen 3 con título -->
+    <div class="w-full flex-shrink-0 relative">
+      <img
+        class="w-4/5 mx-auto h-auto object-contain border-4 border-indigo-900 rounded-lg shadow-lg"
+        src="/img/image3.png"
+        alt="Imagen 3"
+      />
+      <div
+        class="absolute top-0 left-0 right-0 flex items-center justify-center text-black font-bold text-2xl italic p-2"
+      >Tercer Problema MRUV</div>
+    </div>
+  </div>
+
+  <!-- Controles de navegación -->
+  <div class="absolute top-1/2 left-0 transform -translate-y-1/2">
+    <button
+      onclick="moveCarousel(-1)"
+      class="text-white bg-gray-800 p-2 rounded-full"
+    >
+      &#8592;
+    </button>
+  </div>
+  <div class="absolute top-1/2 right-0 transform -translate-y-1/2">
+    <button
+      onclick="moveCarousel(1)"
+      class="text-white bg-gray-800 p-2 rounded-full"
+    >
+      &#8594;
+    </button>
+  </div>
+</div>
+
 <div class="mt-8 text-center">
   <a
     href="home_student"
     class="inline-block bg-gradient-to-r from-red-500 via-pink-500 to-yellow-500 hover:from-yellow-500 hover:via-pink-500 hover:to-red-500 text-white font-bold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
   >
-    Volver a Home
+    Volver a los Temas
   </a>
 </div>
+
+<script src="js/simulation_mru.js"></script>

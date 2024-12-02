@@ -150,7 +150,10 @@ function guardarDatosSimulacion(req, res) {
 
 function simulation2(req, res) {
   if (req.session.loggedin) {
-    res.render("simulations/simulation2", { name: req.session.name });
+    res.render("simulations/simulation2", {
+      name: req.session.name,
+      simulation: req.session.name,
+    });
   } else {
     res.redirect("/login");
   }
@@ -158,7 +161,10 @@ function simulation2(req, res) {
 
 function simulation3(req, res) {
   if (req.session.loggedin) {
-    res.render("simulations/simulation3", { name: req.session.name });
+    res.render("simulations/simulation3", {
+      name: req.session.name,
+      simulation: req.session.name,
+    });
   } else {
     res.redirect("/login");
   }
@@ -182,7 +188,10 @@ function simulationMRUV(req, res) {
 
 function simulation_mruv(req, res) {
   if (req.session.loggedin) {
-    res.render("simulations/simulation_mruv", { name: req.session.name });
+    res.render("simulations/simulation_mruv", {
+      name: req.session.name,
+      simulation_mruv: req.session.name,
+    });
   } else {
     res.redirect("/login");
   }
@@ -190,7 +199,10 @@ function simulation_mruv(req, res) {
 
 function simulation2_mruv(req, res) {
   if (req.session.loggedin) {
-    res.render("simulations/simulation2_mruv", { name: req.session.name });
+    res.render("simulations/simulation2_mruv", {
+      name: req.session.name,
+      simulation_mruv: req.session.name,
+    });
   } else {
     res.redirect("/login");
   }

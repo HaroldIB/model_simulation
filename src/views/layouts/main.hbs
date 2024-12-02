@@ -15,11 +15,15 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=STIX+Two+Math&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="/css/style.css" />
   </head>
 
-  <body class="flex flex-col min-h-screen bg-center bg-cover">
+  <body class="min-h-screen flex flex-col">
     <!-- Contenedor principal que crece para ocupar el espacio -->
     <div class="flex-grow">
       <!-- Contenido de la página -->
@@ -47,6 +51,15 @@
             {{#if simulation}}
               <li class="nav-item px-2">
                 <a href="/simulations_mru">
+                  <p
+                    class="nav-link font-semibold border-2 border-white hover:bg-white hover:text-green-700 py-3 px-4 rounded-md"
+                  >Simulaciones</p>
+                </a>
+              </li>
+            {{/if}}
+            {{#if simulation_mruv}}
+              <li class="nav-item px-2">
+                <a href="/simulations_mruv">
                   <p
                     class="nav-link font-semibold border-2 border-white hover:bg-white hover:text-green-700 py-3 px-4 rounded-md"
                   >Simulaciones</p>

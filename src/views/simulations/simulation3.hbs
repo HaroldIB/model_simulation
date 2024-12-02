@@ -1,5 +1,8 @@
 <div class="container">
-  <h1>TERCER PROBLEMA DE MOVIMIENTO RECTILÍNEO UNIFORME</h1>
+  <h1
+    class="text-center text-1xl sm:text-1xl font-extrabold text-indigo-800 bg-gradient-to-r from-indigo-500 via-blue-500 to-green-500 text-transparent bg-clip-text py-3 sm:py-4 shadow-lg"
+  >TERCER PROBLEMA DE MOVIMIENTO RECTILÍNEO UNIFORME</h1>
+
   <div class="content">
     <div id="modal" class="modal">
       <div class="modal-content">
@@ -15,35 +18,52 @@
         <button id="cancelButton">Corregir</button>
       </div>
     </div>
-    <p>
-      Un tren de
+    
+    <p style="text-align: justify;">
+      Un tren de levitación magnética de
       <input
+        class="w-20 px-3 py-2 border-2 border-indigo-300 rounded-lg text-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
         type="number"
         id="largeInput"
         name="largeInput"
         min="1"
         value="100"
-        oninput="updateValue(this.value)"
+        oninput="updateLargeInputValue(this.value)"
       />
       <script>
-        function updateValue(value) {
-        document.getElementById("distanceInput").textContent = value; }
+        function updateLargeInputValue(value) {
+        document.getElementById("largeInput").textContent = value; }
       </script>
-      metros de longitud viaja a velocidad constante de módulo
-      <input type="number" id="speedInput" name="speedInput" value="20" />
-      [m/s], ¿Qué tiempo demorará en cruzar completamente un tunel recto de
+
+      <span class="font-math" title="metros">[m]</span>
+      de longitud viaja a velocidad constante de módulo
       <input
+        class="w-20 px-3 py-2 border-2 border-indigo-300 rounded-lg text-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
+        type="number"
+        id="speedInput"
+        name="speedInput"
+        name="speedInput"
+        value="20"
+      />
+
+      <span class="font-math" title="metros sobre segundo">[m/s]</span>,
+      <b>¿Qué tiempo demorará en cruzar completamente un tunel recto de</b>
+      <input
+        class="w-20 px-3 py-2 border-2 border-indigo-300 rounded-lg text-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
         type="number"
         id="distanceInput"
         name="distanceInput"
         min="1"
         value="200"
-        oninput="updateValue(this.value)"
+        oninput="updateDistanceInputValue(this.value)"
       />
-      metros?
+      <script>
+        function updateDistanceInputValue(value) {
+        document.getElementById("distanceInput").textContent = value; }
+      </script>
+      <b><span class="font-math" title="metros ">[m]</span> de longitud?</b>
     </p>
     <div class="controls">
-      <!-- <label for="speedInput">Velocidad de la moto:</label> -->
       <button id="startButton" class="startButton">
         Iniciar simulación
       </button>
@@ -55,20 +75,22 @@
 
       <canvas id="canvas" width="700" height="300"></canvas>
 
-    </div>
     <div class="graph-container">
+      <h2 class="text-indigo-900 text-sm font-semibold underline">GRÁFICAS</h2>
       <div>
-        <h2>Gráfica Distancias Vs. Tiempo</h2>
+        <h2 class="text-indigo-800 text-sm italic font-semibold">
+          Distancias Vs. Tiempo</h2>
         <canvas id="graphCanvas" width="400" height="300"></canvas>
       </div>
       <div>
-        <h2>Gráfica Velocidad Vs. Tiempo</h2>
+        <h2 class="text-indigo-800 text-sm italic font-semibold">
+          Velocidad Vs. Tiempo</h2>
         <canvas id="velocityGraphCanvas" width="400" height="300"></canvas>
       </div>
     </div>
   </div>
 </div>
-
+<script src="/js/simulation.js"></script>
 <script src="/js/graph.js"></script>
 <script src="/js/background.js"></script>
 <script src="/js/distanceDisplay.js"></script>

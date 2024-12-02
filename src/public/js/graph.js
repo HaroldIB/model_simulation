@@ -83,7 +83,7 @@ class Graph {
 
     // Dibuja los puntos
     this.context.strokeStyle = "red";
-    this.context.lineWidth = 1;
+    this.context.lineWidth = 3;
     this.context.beginPath();
     this.points.forEach((point, index) => {
       const x = 50 + (point.time / this.maxTime) * (this.canvas.width - 100);
