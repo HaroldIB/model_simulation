@@ -1,5 +1,5 @@
 <h1
-  class="text-center my-8 sm:my-24 text-4xl sm:text-6xl font-bold text-purple-700"
+  class="text-center my-8 sm:my-24 text-4xl sm:text-6xl font-bold text-indigo-900"
 >
   Bienvenido
   <b class="text-yellow-500">{{name}}</b>
@@ -26,6 +26,8 @@
     TERCER PROBLEMA MRU
   </a>
 </div>
+
+<!-- Botón para volver a home -->
 <div class="mt-8 text-center">
   <a
     href="home_student"
@@ -34,3 +36,81 @@
     Volver a Home
   </a>
 </div>
+
+<!-- Carrusel de imágenes -->
+<div class="mt-8 relative w-full max-w-4xl mx-auto overflow-hidden">
+  <div id="carousel" class="flex transition-transform duration-700 ease-in-out">
+    <!-- Imagen 1 -->
+    <div class="w-full flex-shrink-0">
+      <a href="simulations/simulation">
+        <img
+          class="w-full h-80 object-cover"
+          src="/img/image1.png"
+          alt="Imagen 1"
+        />
+      </a>
+    </div>
+    <!-- Imagen 2 -->
+    <div class="w-full flex-shrink-0">
+      <a href="simulations/simulation2">
+        <img
+          class="w-full h-80 object-cover"
+          src="/img/image2.png"
+          alt="Imagen 2"
+        />
+      </a>
+    </div>
+    <!-- Imagen 3 -->
+    <div class="w-full flex-shrink-0">
+      <a href="simulations/simulation3">
+        <img
+          class="w-full h-80 object-cover"
+          src="/img/image3.png"
+          alt="Imagen 3"
+        />
+      </a>
+    </div>
+  </div>
+
+  <!-- Controles de navegación -->
+  <div class="absolute top-1/2 left-0 transform -translate-y-1/2">
+    <button
+      onclick="moveCarousel(-1)"
+      class="text-white bg-gray-800 p-2 rounded-full"
+    >
+      &#8592;
+    </button>
+  </div>
+  <div class="absolute top-1/2 right-0 transform -translate-y-1/2">
+    <button
+      onclick="moveCarousel(1)"
+      class="text-white bg-gray-800 p-2 rounded-full"
+    >
+      &#8594;
+    </button>
+  </div>
+</div>
+
+<!-- Scripts para carrusel -->
+<script>
+  let currentIndex = 0;
+  const images = document.querySelectorAll("#carousel div");
+  const totalImages = images.length;
+
+  // Función para mover el carrusel
+  function moveCarousel(direction) {
+    currentIndex = (currentIndex + direction + totalImages) % totalImages;
+    updateCarouselPosition();
+  }
+
+  // Actualizar la posición del carrusel
+  function updateCarouselPosition() {
+    const carousel = document.getElementById("carousel");
+    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }
+
+  // Configurar el carrusel para que pase automáticamente cada 5 segundos
+  setInterval(() => {
+    moveCarousel(1);
+  }, 5000);
+</script>
