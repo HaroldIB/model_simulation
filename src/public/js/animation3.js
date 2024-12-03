@@ -170,9 +170,11 @@ function handleAnimationEnd() {
     (Number(speedInput.value) /
       (Number(largeInput.value) + Number(distanceInput.value)));
   modalText.textContent =
-    "El tiempo que tadar el tren en cruzar el tunel es: " +
-    (Number(largeInput.value) + Number(distanceInput.value)) /
-      Number(speedInput.value) +
+    "El tiempo que tarda el tren en cruzar el tunel es: " +
+    (
+      (Number(largeInput.value) + Number(distanceInput.value)) /
+      Number(speedInput.value)
+    ).toFixed(0) +
     " segundos";
   modal.style.visibility = "visible";
   enableButtonsAndInputs();
